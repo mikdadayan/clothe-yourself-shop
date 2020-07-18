@@ -10,7 +10,7 @@ import CartIcon from "../cart-icon/cart-icon.component";
 import CartDropdown from "../cart-dropdown/cart-dropdown.component";
 import { toggleCartHidden } from "../redux/cart/cart-action";
 
-const Header = ({ currentUser, toggleCartHidden, hidden }) => (
+const Header = ({ currentUser,  hidden }) => (
   <div className="header">
     <Link className="logo-container" to="/">
       <Logo className="logo" />
@@ -31,7 +31,7 @@ const Header = ({ currentUser, toggleCartHidden, hidden }) => (
           SIGN IN
         </Link>
       )}
-      <CartIcon toggleCartHidden={toggleCartHidden} />
+      <CartIcon />
     </div>
     {!hidden ? <CartDropdown /> : null}
   </div>
@@ -42,10 +42,5 @@ const mapStateToProps = ({ user: { currentUser }, cart: { hidden } }) => ({
   hidden: hidden,
 });
 
-const mapDispatchToState = (dispatch) => ({
-  toggleCartHidden: () => {
-    dispatch(toggleCartHidden());
-  },
-});
 
-export default connect(mapStateToProps, mapDispatchToState)(Header);
+export default connect(mapStateToProps)(Header);

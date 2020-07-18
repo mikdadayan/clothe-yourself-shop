@@ -24,9 +24,9 @@ class App extends Component {
           console.log("88888", snapshot.data());
           this.props.setCurrentUser(
             {
-                id: snapshot.id,
-                ...(await snapshot.data()),
-              },
+              id: snapshot.id,
+              ...(await snapshot.data()),
+            },
             () => {
               console.log("$$$$$", this.state);
             }
