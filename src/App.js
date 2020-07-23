@@ -11,7 +11,13 @@ import { connect } from "react-redux";
 import Header from "./components/header/header.component";
 import HomePage from "./pages/homepage/homepage.component";
 import ShopPage from "./pages/shop/shop.component";
+import ChekoutPage from "./pages/checkout/checkout.component";
 import { setCurrentUser } from "./components/redux/user/user-action";
+import { selectCurrentUser } from "./components/redux/user/user-selectors";
+import { createStructuredSelector } from "reselect";
+import CategoryPage from "./pages/category/category.component";
+
+
 
 class App extends Component {
   unsubscribeFromAuth = null;
@@ -50,6 +56,8 @@ class App extends Component {
         <Switch>
           <Route exact path="/" component={HomePage} />
           <Route exact path="/shop" component={ShopPage} />
+          <Route exact path="/checkout" component={ChekoutPage} />
+          {/* <Route exact path={`/shop/:categoryId`} render={() => <CategoryPage/>} /> */}
           <Route
             exact
             path="/signin"
@@ -63,9 +71,13 @@ class App extends Component {
   }
 }
 
-const mapStateToProps = ({ user }) => ({
-  currentUser: user.currentUser,
-});
+const mapStateToProps = createStructuredSelector({
+  currentUser: selectCurrentUser
+})
+
+// ({ user }) => ({
+//   currentUser: user.currentUser,
+// });
 
 const mapDispatchToState = (dispatch) => ({
   setCurrentUser: (user) => dispatch(setCurrentUser(user)),

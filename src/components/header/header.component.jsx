@@ -8,7 +8,11 @@ import "./header.styles.scss";
 import { auth } from "../firebase/firebase.utils";
 import CartIcon from "../cart-icon/cart-icon.component";
 import CartDropdown from "../cart-dropdown/cart-dropdown.component";
-import { toggleCartHidden } from "../redux/cart/cart-action";
+import { createStructuredSelector } from "reselect";
+import { selectHidden } from "../redux/cart/cart-selectors";
+import { selectCurrentUser } from "../redux/user/user-selectors";
+// import { toggleCartHidden } from "../redux/cart/cart-action";
+
 
 const Header = ({ currentUser,  hidden }) => (
   <div className="header">
@@ -37,10 +41,15 @@ const Header = ({ currentUser,  hidden }) => (
   </div>
 );
 
-const mapStateToProps = ({ user: { currentUser }, cart: { hidden } }) => ({
-  currentUser: currentUser,
-  hidden: hidden,
-});
+const mapStateToProps = createStructuredSelector({
+  hidden: selectHidden,
+  currentUser: selectCurrentUser
+}) 
+
+// ({ user: { currentUser }, cart: { hidden } }) => ({
+//   currentUser: currentUser,
+//   hidden: hidden,
+// });
 
 
 export default connect(mapStateToProps)(Header);

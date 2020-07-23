@@ -17,6 +17,12 @@
       flex-direction: column;
       overflow: scroll;
     }
+
+    .empty-message{
+      font-size: 18px;
+      font-family: "Open Sense Condensed";
+      margin: 50px auto;
+    }
   
     button {
       margin-top: auto;

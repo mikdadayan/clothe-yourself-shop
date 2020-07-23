@@ -18,7 +18,7 @@ class SignIn extends React.Component{
         event.preventDefault();
         const {email, password} = this.state;
         try{
-            await  auth.signInWithEmailAndPassword(email, password)
+            await auth.signInWithEmailAndPassword(email, password)
             this.setState({
                 email: '',
                 password: ''
