@@ -15,7 +15,6 @@ import ChekoutPage from "./pages/checkout/checkout.component";
 import { setCurrentUser } from "./components/redux/user/user-action";
 import { selectCurrentUser } from "./components/redux/user/user-selectors";
 import { createStructuredSelector } from "reselect";
-import CategoryPage from "./pages/category/category.component";
 
 
 
@@ -55,9 +54,8 @@ class App extends Component {
         <Header />
         <Switch>
           <Route exact path="/" component={HomePage} />
-          <Route exact path="/shop" component={ShopPage} />
+          <Route  path="/shop" component={ShopPage} />
           <Route exact path="/checkout" component={ChekoutPage} />
-          {/* <Route exact path={`/shop/:categoryId`} render={() => <CategoryPage/>} /> */}
           <Route
             exact
             path="/signin"

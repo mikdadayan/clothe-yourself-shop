@@ -2,17 +2,15 @@ import React from "react";
 // import SHOP_DATA from './shop.data';
 import CollectionOverview from '../../components/collection-overview/collection-overview.component'
 import { Route } from "react-router-dom";
-import CategoryPage from "../category/category.component";
+import CollectionPage from "../collection/collection.component.jsx";
 
 
 const ShopPage = ({match}) => {
-    console.log(CategoryPage)
-    console.log(`${match.path}/:category`)
+    // console.log(match)
     return (
         <div className='shop-page'>
-            <Route path={`${match.path}/:categoryId`} render={() => <CategoryPage/>} />
-
             <Route exact path={`${match.path}`} component={CollectionOverview} />
+            <Route path={`${match.path}/:collectionId`} component={CollectionPage} />
         </div>
     )
 }
