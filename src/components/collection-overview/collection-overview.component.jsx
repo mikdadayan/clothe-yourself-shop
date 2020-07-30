@@ -7,7 +7,6 @@ import { createStructuredSelector } from "reselect";
 import { connect } from "react-redux";
 
 const CollectionOverview = ({ collections, match }) => {
-  console.log("^^^^^^^^", collections);
   return (
     <div className="collection-overview">
       {collections.map(({ id, ...otherCollectionProps }) => (

@@ -5,6 +5,7 @@ import SignInAndSignUp from "./pages/sign-in-and-signup.component/sign-in-and-si
 import {
   auth,
   createUserProfileDocument,
+  addCollectionDocuments,
 } from "./components/firebase/firebase.utils";
 import { connect } from "react-redux";
 
@@ -15,32 +16,30 @@ import ChekoutPage from "./pages/checkout/checkout.component";
 import { setCurrentUser } from "./components/redux/user/user-action";
 import { selectCurrentUser } from "./components/redux/user/user-selectors";
 import { createStructuredSelector } from "reselect";
-
-
+import { selectShopCollectionForPreview } from "./components/redux/shop/shop-selector";
 
 class App extends Component {
   unsubscribeFromAuth = null;
 
   componentDidMount() {
+    const { setCurrentUser, collectionsArray } = this.props;
+
+    
+
     this.unsubscribeFromAuth = auth.onAuthStateChanged(async (userAuth) => {
       if (userAuth) {
         const userRef = await createUserProfileDocument(userAuth);
         userRef.onSnapshot(async (snapshot) => {
-          console.log("88888", snapshot.data());
-          this.props.setCurrentUser(
-            {
-              id: snapshot.id,
-              ...(await snapshot.data()),
-            },
-            () => {
-              console.log("$$$$$", this.state);
-            }
-          );
+          setCurrentUser({
+            id: snapshot.id,
+            ...(await snapshot.data()),
+          });
         });
-        console.log("#####", this.state);
       } else {
-        this.props.setCurrentUser(userAuth);
+        setCurrentUser(userAuth);
       }
+      // console.log(collectionsArray)
+      // addCollectionDocuments('collections', collectionsArray.map(({title, items}) => ({title, items})))
     });
   }
 
@@ -54,7 +53,7 @@ class App extends Component {
         <Header />
         <Switch>
           <Route exact path="/" component={HomePage} />
-          <Route  path="/shop" component={ShopPage} />
+          <Route path="/shop" component={ShopPage} />
           <Route exact path="/checkout" component={ChekoutPage} />
           <Route
             exact
@@ -70,8 +69,9 @@ class App extends Component {
 }
 
 const mapStateToProps = createStructuredSelector({
-  currentUser: selectCurrentUser
-})
+  currentUser: selectCurrentUser,
+  collectionsArray: selectShopCollectionForPreview
+});
 
 // ({ user }) => ({
 //   currentUser: user.currentUser,
