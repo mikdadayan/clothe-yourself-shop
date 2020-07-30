@@ -49,7 +49,7 @@ class ShopPage extends React.Component {
     return (
       <div className="shop-page">
         <Route
-          
+          exact
           path={`${match.path}`}
           render={(props) => (
             <CollectionOverviewWithSpinner isLoading={isLoading} {...props} />
